@@ -6,14 +6,22 @@ dotenv.config();
 
 // Create a new connection pool to the PostgreSQL database.
 // The pool manages multiple client connections for better performance.
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: parseInt(process.env.DB_PORT || '5432'),
-});
+const isProduction = process.env.NODE_ENV === "production";
 
+export const pool = process.env.DATABASE_URL
+  ? new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  })
+  : new Pool({
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: parseInt(process.env.DB_PORT || "5432"),
+  });
 // Function to create the users table if it doesn't exist.
 // This is useful for development but for production, a migration tool is recommended.
 //It also creates the Redis client

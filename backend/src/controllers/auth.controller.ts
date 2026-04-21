@@ -41,7 +41,7 @@ export const loginHandler = async (req: Request, res: Response, next: NextFuncti
     res.cookie('token', token, {
       httpOnly: true, // Prevents client-side JavaScript from accessing the cookie.
       secure: process.env.NODE_ENV === 'production', // Ensures the cookie is sent only over HTTPS.
-      sameSite: 'strict', // Mitigates CSRF attacks by preventing the browser from sending the cookie along with cross-site requests.
+      sameSite: "none", // Mitigates CSRF attacks by preventing the browser from sending the cookie along with cross-site requests.
       maxAge: 24 * 60 * 60 * 1000, // Sets the cookie's expiration to 1 day, matching the JWT.
       path: '/', // The cookie is available to all pages.
     });
