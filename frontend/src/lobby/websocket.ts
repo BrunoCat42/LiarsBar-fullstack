@@ -54,13 +54,12 @@ function connect() {
   if (import.meta.env.DEV) {
     wsUrl = `ws://localhost:3001/ws${window.location.pathname}`;
   } else {
-    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-    const host = window.location.host;
+    const baseWsUrl = import.meta.env.VITE_WS_URL;
     const path = window.location.pathname;
-    wsUrl = `${protocol}://${host}/ws${path}`;
+    wsUrl = `${baseWsUrl}${path}`;
   }
 
-  console.log(`[WS] Attempting to connect to: ${wsUrl}`); // Useful debug log
+  console.log(`[WS] Attempting to connect to: ${wsUrl}`);
 
   socket = new WebSocket(wsUrl);
 
