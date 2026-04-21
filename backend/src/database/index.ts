@@ -53,7 +53,3 @@ export const initializeDatabase = async () => {
     client.release();
   }
 };
-
-export {
-  pool,
-};
