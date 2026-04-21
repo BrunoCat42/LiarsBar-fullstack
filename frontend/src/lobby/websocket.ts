@@ -52,7 +52,7 @@ function connect() {
   let wsUrl: string;
 
   if (import.meta.env.DEV) {
-    wsUrl = `ws://localhost:3001/ws${window.location.pathname}`;
+    wsUrl = "wss://liarsbar-fullstack-production.up.railway.app/ws/home";
   } else {
     const baseWsUrl = import.meta.env.VITE_WS_URL;
     const path = window.location.pathname;
